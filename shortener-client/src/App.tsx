@@ -20,8 +20,8 @@ export default function App() {
         <Route path="/home" element={<ProtectedRoute ><Home /></ProtectedRoute>} />
         <Route path="/" element={<LandingPage />} />
         <Route path="/auth" element={<Auth />} />
-        <Route path="/go/:shortUrl" element={<RedirectHandler />} />
-        <Route path="/g/:shortUrl" element={<RedirectGuestHandler />} />
+        <Route path="/G/:shortUrl" element={<RedirectHandler />} />
+        <Route path="/gi/:shortUrl" element={<RedirectGuestHandler />} />
 
         <Route path="/urls" element={<ProtectedRoute><UserUrls /></ProtectedRoute>} />
         <Route path="/guest" element={<GuestPage />} />

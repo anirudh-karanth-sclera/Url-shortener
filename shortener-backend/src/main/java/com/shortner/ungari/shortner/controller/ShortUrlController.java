@@ -1,7 +1,9 @@
 package com.shortner.ungari.shortner.controller;
 
 import com.shortner.ungari.shortner.model.Url;
+import com.shortner.ungari.shortner.model.UrlGuest;
 import com.shortner.ungari.shortner.model.Users;
+import com.shortner.ungari.shortner.service.UrlGuestServiceDao;
 import com.shortner.ungari.shortner.service.UrlServiceDao;
 import com.shortner.ungari.shortner.service.UserService;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -19,16 +21,14 @@ import java.util.Map;
 public class ShortUrlController {
     private final UrlServiceDao urlServiceDao;
     private final UserService userService;
+    private final UrlGuestServiceDao urlGuestServiceDao;
 
-    public ShortUrlController(UrlServiceDao urlServiceDao, UserService userService) {
+    public ShortUrlController(UrlServiceDao urlServiceDao, UserService userService, UrlGuestServiceDao urlGuestServiceDao) {
         this.urlServiceDao = urlServiceDao;
         this.userService = userService;
+        this.urlGuestServiceDao = urlGuestServiceDao;
     }
 
-    @GetMapping("/")
-    public  String alo(){
-        return "djas";
-    }
 
     @PostMapping("/create")
     public ResponseEntity<?> createShortUrl(@RequestBody Map<String, String> request) {
@@ -51,15 +51,13 @@ public class ShortUrlController {
     @PostMapping("/unga/create")
     public ResponseEntity<?> createShortUrlGuest(@RequestBody Map<String, String> request) {
 
-        Users user = userService.findUserByName("guest");
-
         String url = request.get("url");
 
         if (url == null || url.trim().isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "URL cannot be empty");
         }
 
-        Url shortenedUrl = urlServiceDao.createShortUrl(url, null, user);
+        UrlGuest shortenedUrl = urlGuestServiceDao.createGuestUrl(url);
         return ResponseEntity.ok(shortenedUrl);
 
 
@@ -72,9 +70,18 @@ public class ShortUrlController {
     }
 
 
-    @GetMapping("/unga/{shortUrl}")
+    @GetMapping("/go/{shortUrl}")
     public RedirectView redirectToLongUrl(@PathVariable String shortUrl) {
         Url url = urlServiceDao.findByShortUrl(shortUrl);
+        if (url == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Short URL not found: " + shortUrl);
+        }
+        return new RedirectView(url.getUrl()); // Redirects to the original URL
+    }
+
+    @GetMapping("/unga/{shortUrl}")
+    public RedirectView redirectGuestToLongUrl(@PathVariable String shortUrl) {
+        UrlGuest url = urlGuestServiceDao.findByShortUrl(shortUrl);
         if (url == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Short URL not found: " + shortUrl);
         }

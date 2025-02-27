@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { TiTick } from "react-icons/ti";
 
-const CopyButton = ({ shortUrl }: { shortUrl: string }) => {
+const CopyButton = ({ shortUrl, isGuest }: { shortUrl: string , isGuest:boolean}) => {
   const [copiedUrl, setCopiedUrl] = useState<string>("");
 
   const handleCopy = () => {
-    const fullUrl = `http://localhost:5173/go/${shortUrl}`;
+    const fullUrl = `http://localhost:5173/${isGuest?"gi":"G"}/${shortUrl}`;
     navigator.clipboard.writeText(fullUrl);
     setCopiedUrl(fullUrl);
 

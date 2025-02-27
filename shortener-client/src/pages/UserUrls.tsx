@@ -35,15 +35,7 @@ export default function UserUrls() {
     fetchUrls();
   }, []);
 
-  const handleCopy = (shortUrl: string) => {
-    const fullUrl = `http://localhost:5173/go/${shortUrl}`;
-    navigator.clipboard.writeText(fullUrl);
-    setCopiedUrl(fullUrl);
 
-    setTimeout(() => {
-      setCopiedUrl(null);
-    }, 2000);
-  };
 
   return (
     <div className="flex flex-col items-center justify-start min-h-screen bg-gradient-to-br from-gray-900 to-gray-700 text-white">
@@ -63,7 +55,7 @@ export default function UserUrls() {
           <p className="text-red-500">{error}</p>
         ) : urls.length > 0 ? (
           urls.map((url, index) => (
-           <UrlCard url={url} index={index}/>
+           <UrlCard url={url} index={index+1}/>
           ))
         ) : (
           <p className="text-gray-600">No URLs found.</p>

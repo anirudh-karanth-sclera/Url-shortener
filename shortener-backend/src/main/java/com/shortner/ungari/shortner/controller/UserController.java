@@ -19,8 +19,10 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<UserDTO> register(@RequestBody Users user) {
-        if(user.getUsername()== null && user.getPassword()==null){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid");
+
+        if((user.getUsername()== null || user.getUsername().isEmpty())
+                && (user.getPassword()==null || user.getPassword().isEmpty())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid credentials");
         }
 
         return ResponseEntity.ok(userService.createUser(user));
@@ -28,15 +30,13 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<UserDTO> login(@RequestBody Users user) {
-        if(user.getUsername()== null && user.getPassword()==null){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid");
+        if((user.getUsername()== null || user.getUsername().isEmpty())
+                && (user.getPassword()==null || user.getPassword().isEmpty())){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid credentials");
         }
         String token = userService.verify(user, user.getRole());
         return ResponseEntity.ok(new UserDTO(user.getId(), user.getUsername(), token));
     }
 
-    @GetMapping("/s")
-    public String getAllUsers() {
-        return "ungari";
-    }
+
 }

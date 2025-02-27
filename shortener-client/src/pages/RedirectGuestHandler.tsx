@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 export default function RedirectGuestHandler() {
   const { shortUrl } = useParams();
+  console.log("g")
   useEffect(() => {
     const fetchAndRedirect = async () => {
       try {

@@ -5,9 +5,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(
-        uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "name"})
-)
 public class Url {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

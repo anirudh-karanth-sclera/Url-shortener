@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 export default function RedirectHandler() {
   const { shortUrl } = useParams(); // Get short URL from route
-
+console.log("G")
   useEffect(() => {
     const fetchAndRedirect = async () => {
       try {

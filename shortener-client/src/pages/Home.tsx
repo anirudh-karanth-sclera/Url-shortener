@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import CreateUrl from "../components/CreateUrl";
 import Navbar from "../components/Navbar";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { UrlType } from "./UserUrls";
 
 export interface UrlShortenFormType {
@@ -19,8 +19,9 @@ export default function Home() {
 
 
 
-  const handleShorten = async ( {originalUrl, alias, setAlias, setError,setOriginalUrl}:UrlShortenFormType) => {
-  
+  const handleShorten = async (e:FormEvent, {originalUrl, alias, setAlias, setError,setOriginalUrl}:UrlShortenFormType) => {
+    e.preventDefault()
+  console.log(originalUrl)
     setError("");
     setUrlData(null);
 
@@ -58,7 +59,7 @@ export default function Home() {
 
       
       <div className="flex flex-col items-center justify-start space-y-8 mt-10">
-        <CreateUrl handleShorten={handleShorten} urlData={urlData}  />
+        <CreateUrl handleShorten={handleShorten} urlData={urlData} isGuest={false} />
       </div>
     </div>
   );

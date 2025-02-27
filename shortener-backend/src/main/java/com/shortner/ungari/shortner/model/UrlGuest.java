@@ -13,6 +13,13 @@ public class UrlGuest {
     @NotBlank(message ="plz enter url" )
     private String url;
 
+    public UrlGuest() {
+    }
+
+    public UrlGuest(String url) {
+        this.url=url;
+    }
+
     public int getShortUrl() {
         return shortUrl;
     }

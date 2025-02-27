@@ -6,18 +6,18 @@ const UrlCard = ({url, index}:{url:UrlType, index?:number}) => {
     <div key={index} className="mb-4 border-b pb-2 flex items-center justify-between">
     <div>
       <p className="text-green-600 font-semibold">
-        {`${index? index + 1:""}`}. {url.name || "none"}:{" "}
+        {`${index? index:""}`}. {url.name || "none"}:{" "}
         <a
-          href={`http://localhost:5173/go/${url.shortUrl}`}
+          href={`http://localhost:5173/G/${url.shortUrl}`}
           className="underline hover:text-green-800 transition"
           target="_blank"
           rel="noopener noreferrer"
         >
-          {`http://localhost:5173/go/${url.shortUrl}`}
+          {`http://localhost:5173/G/${url.shortUrl}`}
         </a>
       </p>
     </div>
-    <CopyButton shortUrl={url.shortUrl.toString()}/>
+    <CopyButton shortUrl={url.shortUrl.toString()} isGuest={false}/>
   </div>
   )
 }
