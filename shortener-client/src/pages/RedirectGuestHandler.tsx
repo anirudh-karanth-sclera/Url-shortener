@@ -1,13 +1,12 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-export default function RedirectHandler() {
-  const { shortUrl } = useParams(); // Get short URL from route
-
+export default function RedirectGuestHandler() {
+  const { shortUrl } = useParams();
   useEffect(() => {
     const fetchAndRedirect = async () => {
       try {
-        window.location.href = `http://localhost:8080/go/${shortUrl}`
+        window.location.href = `http://localhost:8080/unga/${shortUrl}`
         
       } catch (error) {
         console.error("Error fetching URL:", error);

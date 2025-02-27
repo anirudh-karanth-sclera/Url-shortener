@@ -29,8 +29,7 @@ const Auth = () => {
         alert("Success");
         navigate("/home");
       } catch (error: any) {
-        console.error(error);
-        alert(error.message);
+    alert(error.message);
       }
     };
   

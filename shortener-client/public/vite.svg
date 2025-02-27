@@ -1,1 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--logos" width="31.88" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 257"><defs><linearGradient id="IconifyId1813088fe1fbc01fb466" x1="-.828%" x2="57.636%" y1="7.652%" y2="78.411%"><stop offset="0%" stop-color="#41D1FF"></stop><stop offset="100%" stop-color="#BD34FE"></stop></linearGradient><linearGradient id="IconifyId1813088fe1fbc01fb467" x1="43.376%" x2="50.316%" y1="2.242%" y2="89.03%"><stop offset="0%" stop-color="#FFEA83"></stop><stop offset="8.333%" stop-color="#FFDD35"></stop><stop offset="100%" stop-color="#FFA800"></stop></linearGradient></defs><path fill="url(#IconifyId1813088fe1fbc01fb466)" d="M255.153 37.938L134.897 252.976c-2.483 4.44-8.862 4.466-11.382.048L.875 37.958c-2.746-4.814 1.371-10.646 6.827-9.67l120.385 21.517a6.537 6.537 0 0 0 2.322-.004l117.867-21.483c5.438-.991 9.574 4.796 6.877 9.62Z"></path><path fill="url(#IconifyId1813088fe1fbc01fb467)" d="M185.432.063L96.44 17.501a3.268 3.268 0 0 0-2.634 3.014l-5.474 92.456a3.268 3.268 0 0 0 3.997 3.378l24.777-5.718c2.318-.535 4.413 1.507 3.936 3.838l-7.361 36.047c-.495 2.426 1.782 4.5 4.151 3.78l15.304-4.649c2.372-.72 4.652 1.36 4.15 3.788l-11.698 56.621c-.732 3.542 3.979 5.473 5.943 2.437l1.313-2.028l72.516-144.72c1.215-2.423-.88-5.186-3.54-4.672l-25.505 4.922c-2.396.462-4.435-1.77-3.759-4.114l16.646-57.705c.677-2.35-1.37-4.583-3.769-4.113Z"></path></svg>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 0 33 33" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    
+    <title>permalink</title>
+    <desc>Created with Sketch Beta.</desc>
+    <defs>
+
+</defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Icon-Set-Filled" sketch:type="MSLayerGroup" transform="translate(-154.000000, -724.000000)" fill="#000000">
+            <path d="M184.785,727.613 L183.355,726.184 C181.775,724.604 178.58,724.42 177,726 L170,733 C168.944,734.056 169.095,735.881 169.451,737.228 L179,728 C179.79,727.21 181.21,728.21 182,729 C182.79,729.79 183.79,731.21 183,732 L173.741,741.518 C175.088,741.873 176.944,742.056 178,741 L185,734 C186.58,732.421 186.365,729.193 184.785,727.613 L184.785,727.613 Z M162,753 C161.21,753.79 159.79,752.79 159,752 C158.21,751.21 157.21,749.79 158,749 L167.228,739.451 C165.881,739.095 164.056,738.944 163,740 L156,747 C154.42,748.58 154.604,751.775 156.184,753.354 L157.614,754.785 C159.193,756.365 162.42,756.58 164,755 L171,748 C172.056,746.944 171.874,745.088 171.518,743.741 L162,753 L162,753 Z M173.702,737.282 C173.307,736.888 172.667,736.888 172.272,737.282 L167.267,742.287 C166.872,742.683 166.872,743.322 167.267,743.718 C167.662,744.112 168.302,744.112 168.697,743.718 L173.702,738.713 C174.097,738.317 174.097,737.678 173.702,737.282 L173.702,737.282 Z" id="permalink" sketch:type="MSShapeGroup">
+
+</path>
+        </g>
+    </g>
+</svg>

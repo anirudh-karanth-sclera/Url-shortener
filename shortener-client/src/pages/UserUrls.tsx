@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CopyButton from "./CopyButton";
+import CopyButton from "../components/CopyButton";
+import UrlCard from "../components/UrlCard";
+
+export interface UrlType { url: string; shortUrl: string; name: string }
 
 export default function UserUrls() {
   const navigate = useNavigate();
-  const [urls, setUrls] = useState<{ url: string; shortUrl: string; name: string }[]>([]);
+  const [urls, setUrls] = useState<UrlType[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [copiedUrl, setCopiedUrl] = useState<string | null>(null);
 
@@ -54,29 +57,13 @@ export default function UserUrls() {
           Home
         </button>
       </nav>
-
-      {/* URL List */}
+      
       <div className="bg-white p-6 rounded-2xl shadow-lg w-96 text-gray-900 mt-10">
         {error ? (
           <p className="text-red-500">{error}</p>
         ) : urls.length > 0 ? (
           urls.map((url, index) => (
-            <div key={index} className="mb-4 border-b pb-2 flex items-center justify-between">
-              <div>
-                <p className="text-green-600 font-semibold">
-                  {index + 1}. {url.name || "none"}:{" "}
-                  <a
-                    href={`http://localhost:5173/go/${url.shortUrl}`}
-                    className="underline hover:text-green-800 transition"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {`http://localhost:5173/go/${url.shortUrl}`}
-                  </a>
-                </p>
-              </div>
-              <CopyButton shortUrl={url.shortUrl.toString()}/>
-            </div>
+           <UrlCard url={url} index={index}/>
           ))
         ) : (
           <p className="text-gray-600">No URLs found.</p>

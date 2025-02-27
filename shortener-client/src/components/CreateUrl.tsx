@@ -1,51 +1,13 @@
 import { useState } from "react";
 import CopyButton from "./CopyButton";
-export interface UrlType {
-  shortUrl: number;
-  url: string;
-  name: string;
-}
-export default function CreateUrl() {
+import { UrlShortenFormType } from "../pages/Home";
+import { UrlType } from "../pages/UserUrls";
+import { UrlGuestType } from "../pages/Guest";
+
+export default function CreateUrl({handleShorten, urlData }:{handleShorten:(data: UrlShortenFormType)=>void, urlData:UrlType|UrlGuestType|null}) {
   const [originalUrl, setOriginalUrl] = useState("");
   const [alias, setAlias] = useState("");
-  const [urlData, setUrlData] = useState<UrlType | null>(null);
   const [error, setError] = useState<string | null>(null);
-
-
-
-  const handleShorten = async () => {
-    setError("");
-    setUrlData(null);
-
-    try {
-      const response = await fetch("http://localhost:8080/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify({ url: originalUrl, name: alias }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.log(response)
-        throw new Error(errorData.message || "Failed to shorten URL");
-
-      }
-
-      const data = await response.json();
-      setUrlData(data);
-      console.log(data)
-      setOriginalUrl("")
-      setAlias("")
-    } catch (error: any) {
-      setError(error.message);
-      console.log(error)
-    }
-  };
-
- 
 
   return (
     <div className="flex items-start justify-center  bg-gradient-to-br from-gray-900 to-gray-700 text-white">
@@ -69,7 +31,7 @@ export default function CreateUrl() {
         />
 
         <button
-          onClick={handleShorten}
+          onClick={()=>handleShorten({originalUrl, alias,setAlias,setError,setOriginalUrl})}
           className="mt-4 w-full px-4 py-2 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition"
         >
           Shorten URL
