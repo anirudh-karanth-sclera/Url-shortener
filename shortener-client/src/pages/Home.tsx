@@ -42,6 +42,7 @@ export default function Home() {
       );
     
       setUrlData(response.data);
+   
       setOriginalUrl("");
       setAlias("");
     } catch (error: any) {

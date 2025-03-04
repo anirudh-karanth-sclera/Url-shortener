@@ -11,7 +11,7 @@ export default function CreateUrl({handleShorten, urlData, isGuest }:{handleShor
 
   return (
     <div className="flex items-start justify-center  bg-gradient-to-br from-gray-900 to-gray-700 text-white">
-      <form className="bg-white p-6 rounded-2xl shadow-lg w-96 text-center" onSubmit={(e)=>handleShorten(e,{originalUrl, alias,setAlias,setError,setOriginalUrl})}>
+      <form className="bg-white p-6 rounded-2xl min-h-78 shadow-lg w-96 text-center flex gap-2 flex-col" onSubmit={(e)=>handleShorten(e,{originalUrl, alias,setAlias,setError,setOriginalUrl})}>
         <h1 className="text-3xl font-bold mb-4 text-gray-900">URL Shortener</h1>
 
         <input

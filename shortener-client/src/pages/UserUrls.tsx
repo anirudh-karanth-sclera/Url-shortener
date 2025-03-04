@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UrlCard from "../components/UrlCard";
 import API from "../utils/api";
+import Success from "../components/Success"; // Import Success component
 
 export interface UrlType {
   url: string;
@@ -14,6 +15,7 @@ export default function UserUrls() {
   const [urls, setUrls] = useState<UrlType[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [searchText, setSearchText] = useState("");
+  const [successMessage, setSuccessMessage] = useState<string | null>(null); // Success message state
 
   const fetchUrls = async () => {
     try {
@@ -22,34 +24,33 @@ export default function UserUrls() {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-  
+
       setUrls(response.data);
-      // console.log(response.data);
     } catch (error: any) {
       console.error("Error fetching URLs:", error);
       setError("Failed to load URLs. Please try again later.");
     }
   };
-  
+
   const handleSearch = async (name: string) => {
     if (name === "") {
       fetchUrls();
       return;
     }
-  
+
     try {
       const response = await API.get(`/search/${name}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-  
+
       setUrls(response.data);
     } catch (error: any) {
       console.error("Failed to fetch search results:", error);
     }
   };
-  
+
   const handleDelete = async (shortUrl: string) => {
     try {
       await API.delete(`/delete/${shortUrl}`, {
@@ -57,14 +58,15 @@ export default function UserUrls() {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-  
-      alert("Success");
+
+      setSuccessMessage("URL deleted successfully!"); 
+      setTimeout(() => setSuccessMessage(null), 2000);
       fetchUrls();
     } catch (error: any) {
       console.error("Failed to delete URL:", error);
     }
   };
-  
+
   useEffect(() => {
     fetchUrls();
   }, []);
@@ -95,7 +97,9 @@ export default function UserUrls() {
         </button>
       </nav>
 
-      <div className="bg-white p-6 rounded-2xl shadow-lg w-96 text-gray-900 mt-10">
+      {successMessage && <Success msg={successMessage} />} {/* Show success message */}
+
+      <div className="bg-white p-6  rounded-2xl shadow-lg w-96 text-gray-900 mt-16">
         {error ? (
           <p className="text-red-500">{error}</p>
         ) : urls.length > 0 ? (

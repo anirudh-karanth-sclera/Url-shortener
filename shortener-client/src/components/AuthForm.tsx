@@ -10,6 +10,7 @@ interface AuthFormType {
   setPassword: React.Dispatch<React.SetStateAction<string>>;
   isSignUp: boolean;
   setIsSignUp: React.Dispatch<React.SetStateAction<boolean>>;
+  error:string|null
 }
 
 const AuthForm = ({
@@ -21,7 +22,10 @@ const AuthForm = ({
   setPassword,
   isSignUp,
   setIsSignUp,
+  error
 }: AuthFormType) => {
+
+  
   return (
     <div className="flex flex-col items-center justify-center  bg-gradient-to-br from-gray-900 to-gray-800 text-white p-6">
       <form
@@ -60,6 +64,8 @@ const AuthForm = ({
         >
           {buttonValue}
         </button>
+
+        {error && <p className="mt-3 text-red-500">{error}</p>}
       </form>
 
       <span className="text-white mt-6 text-lg">
