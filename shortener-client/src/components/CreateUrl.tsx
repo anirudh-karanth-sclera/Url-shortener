@@ -25,7 +25,7 @@ export default function CreateUrl({handleShorten, urlData, isGuest }:{handleShor
         <input
           type="text"
           className="w-full p-2 mt-3 rounded-lg bg-gray-200 text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-400"
-          placeholder="Enter Alias (Optional)"
+          placeholder="Enter Alias (Optional - to search for saved URLS)"
           value={alias}
           onChange={(e) => setAlias(e.target.value)}
         />

@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { TiTick } from "react-icons/ti";
+import { FaRegCopy } from "react-icons/fa6";
 
 const CopyButton = ({ shortUrl, isGuest }: { shortUrl: string , isGuest:boolean}) => {
   const [copiedUrl, setCopiedUrl] = useState<string>("");
@@ -11,7 +12,7 @@ const CopyButton = ({ shortUrl, isGuest }: { shortUrl: string , isGuest:boolean}
 
     setTimeout(() => {
       setCopiedUrl("");
-    }, 2000);
+    }, 750);
   };
   return (
     <>
@@ -20,10 +21,10 @@ const CopyButton = ({ shortUrl, isGuest }: { shortUrl: string , isGuest:boolean}
 
       <button
         onClick={() => handleCopy()}
-        className="ml-2 px-3 py-1 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition"
+        className="ml-2 px-3 py-1"
         disabled={copiedUrl?.length > 0}
       >
-        {copiedUrl.length < 1 ? "📋" : <TiTick />}
+        {copiedUrl.length < 1 ? <FaRegCopy /> : <TiTick />}
       </button>
 
 

@@ -1,9 +1,13 @@
 import { UrlType } from "../pages/UserUrls"
 import CopyButton from "./CopyButton"
+import { MdDelete } from "react-icons/md";
 
-const UrlCard = ({url, index}:{url:UrlType, index?:number}) => {
+const UrlCard = ({url, index, handleDelete}:{url:UrlType, index?:number, handleDelete:(id:string)=>void}) => {
+
+  
+
   return (
-    <div key={index} className="mb-4 border-b pb-2 flex items-center justify-between">
+    <div className="mb-4 border-b pb-2 flex items-center justify-between">
     <div>
       <p className="text-green-600 font-semibold">
         {`${index? index:""}`}. {url.name || "none"}:{" "}
@@ -18,6 +22,7 @@ const UrlCard = ({url, index}:{url:UrlType, index?:number}) => {
       </p>
     </div>
     <CopyButton shortUrl={url.shortUrl.toString()} isGuest={false}/>
+    <MdDelete fontSize={22} className="cursor-pointer" onClick={()=>handleDelete(url.shortUrl)}/>
   </div>
   )
 }

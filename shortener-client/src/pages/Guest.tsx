@@ -1,7 +1,6 @@
 import { FormEvent, useState } from "react";
 
 import { UrlType } from "./UserUrls";
-import CopyButton from "../components/CopyButton";
 import Navbar from "../components/Navbar";
 import { UrlShortenFormType } from "./Home";
 import CreateUrl from "../components/CreateUrl";
@@ -11,7 +10,7 @@ export const GuestPage = () => {
 
   const [urlData, setUrlData] = useState<UrlType | null>(null);
 
-  const handleShorten = async (e: FormEvent, {originalUrl, alias, setAlias, setError,setOriginalUrl}:UrlShortenFormType) => {
+  const handleShorten = async (e: FormEvent, {originalUrl, setError,setOriginalUrl}:UrlShortenFormType) => {
     e.preventDefault();
     setError("");
     setUrlData(null);
