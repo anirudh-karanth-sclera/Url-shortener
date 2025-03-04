@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -29,8 +30,9 @@ public class UrlServiceDao {
                 ));
     }
 
-    public Url createShortUrl(String url,String name, Users user){
-        Url newShortUrl = new Url(url, name);
+    public Url createShortUrl(String url,String name, Users user, int daysToExpire){
+        LocalDateTime expiryDate = LocalDateTime.now().plusDays(daysToExpire);
+        Url newShortUrl = new Url(url, name, expiryDate);
         newShortUrl.setUser(user);
         try {
             return urlRepo.save(newShortUrl);
@@ -56,11 +58,7 @@ public class UrlServiceDao {
                         HttpStatus.NOT_FOUND, "Short URL not found: " + shortUrl
                 ));
 
-        if(existingUrl.getUser().getUsername().equals(username)){
-            return true;
-        }else{
-            return false;
-        }
+        return existingUrl.getUser().getUsername().equals(username);
 
     }
 
@@ -73,4 +71,19 @@ public class UrlServiceDao {
     public List<Url> findAll() {
         return urlRepo.findAll();
     }
+
+    public void delete(String shortUrl) {
+        Url existingUrl = urlRepo.findById(Integer.parseInt(shortUrl))
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND, "Short URL not found: " + shortUrl
+                ));
+
+        urlRepo.delete(existingUrl);
+    }
+
+    public List<Url> getAllUrlsOfUserHavingName(String username, String name) {
+        Users user = userService.findUserByName(username);
+        return urlRepo.findByUserAndNameContainingIgnoreCase(user, name);
+    }
+
 }

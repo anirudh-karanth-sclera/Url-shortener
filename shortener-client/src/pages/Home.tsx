@@ -2,6 +2,7 @@ import CreateUrl from "../components/CreateUrl";
 import Navbar from "../components/Navbar";
 import { FormEvent, useState } from "react";
 import { UrlType } from "./UserUrls";
+import API from "../utils/api";
 
 export interface UrlShortenFormType {
   originalUrl: string;
@@ -30,29 +31,24 @@ export default function Home() {
     setUrlData(null);
 
     try {
-      const response = await fetch("http://localhost:8080/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        body: JSON.stringify({ url: originalUrl, name: alias }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.log(response);
-        throw new Error(errorData.message || "Failed to shorten URL");
-      }
-
-      const data = await response.json();
-      setUrlData(data);
-
+      const response = await API.post(
+        "/create",
+        { url: originalUrl, name: alias },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+    
+      setUrlData(response.data);
       setOriginalUrl("");
       setAlias("");
     } catch (error: any) {
-      setError(error.message);
+      console.log(error);
+      setError(error.response?.data?.message || "Failed to shorten URL");
     }
+    
   };
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-700 text-white">

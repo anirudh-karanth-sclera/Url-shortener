@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDateTime;
+
 @Service
 public class UrlGuestServiceDao {
     private final UrlGuestRepo urlGuestRepo;
@@ -17,7 +19,8 @@ public class UrlGuestServiceDao {
     }
 
     public UrlGuest createGuestUrl(String url){
-        UrlGuest urlGuest = new UrlGuest(url);
+        LocalDateTime expiryDate = LocalDateTime.now().plusDays(5);
+        UrlGuest urlGuest = new UrlGuest(url, expiryDate);
         return urlGuestRepo.save(urlGuest);
     }
 

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class Url {
     @Id
@@ -16,6 +18,7 @@ public class Url {
 
     private String name;
 
+    private LocalDateTime expiryDate;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false) // Foreign key reference
     @JsonIgnore
@@ -25,11 +28,19 @@ public class Url {
     public Url() {
     }
 
-    public Url(String url, String name) {
+    public Url(String url, String name, LocalDateTime expiryDate) {
         this.url = url;
         this.name = name;
+        this.expiryDate = expiryDate;
     }
 
+    public LocalDateTime getExpiryDate() {
+        return expiryDate;
+    }
+
+    public void setExpiryDate(LocalDateTime expiryDate) {
+        this.expiryDate = expiryDate;
+    }
     // Getters and Setters
     public String getUrl() {
         return url;

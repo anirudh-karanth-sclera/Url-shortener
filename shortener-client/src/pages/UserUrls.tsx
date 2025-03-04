@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UrlCard from "../components/UrlCard";
+import API from "../utils/api";
 
 export interface UrlType {
   url: string;
@@ -16,61 +17,54 @@ export default function UserUrls() {
 
   const fetchUrls = async () => {
     try {
-      const response = await fetch("http://localhost:8080/urls", {
+      const response = await API.get("/urls", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch URLs");
-      }
-
-      const data = await response.json();
-      setUrls(data);
-      // console.log(data)
-    } catch (error) {
+  
+      setUrls(response.data);
+      // console.log(response.data);
+    } catch (error: any) {
       console.error("Error fetching URLs:", error);
       setError("Failed to load URLs. Please try again later.");
     }
   };
+  
   const handleSearch = async (name: string) => {
-    if(name===""){
+    if (name === "") {
       fetchUrls();
-      return
+      return;
     }
-    const res = await fetch(`http://localhost:8080/search/${name}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
-
-    if (!res.ok) {
-      throw new Error("failed to fetch");
+  
+    try {
+      const response = await API.get(`/search/${name}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+  
+      setUrls(response.data);
+    } catch (error: any) {
+      console.error("Failed to fetch search results:", error);
     }
-
-    const data = await res.json();
-    setUrls(data);
   };
-
+  
   const handleDelete = async (shortUrl: string) => {
-    const res = await fetch(`http://localhost:8080/delete/${shortUrl}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
-    console.log(res);
-    if (!res.ok) {
-      throw new Error("Failed to fetch URLs");
+    try {
+      await API.delete(`/delete/${shortUrl}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+  
+      alert("Success");
+      fetchUrls();
+    } catch (error: any) {
+      console.error("Failed to delete URL:", error);
     }
-
-    alert("success");
-
-    fetchUrls();
   };
-
+  
   useEffect(() => {
     fetchUrls();
   }, []);

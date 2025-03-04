@@ -1,5 +1,5 @@
-import React, { FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { FormEvent } from "react";
+
 
 interface AuthFormType {
   username: string;

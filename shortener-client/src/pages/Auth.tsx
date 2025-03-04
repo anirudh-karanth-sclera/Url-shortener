@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import AuthForm from "../components/AuthForm";
 import { FormEvent, useState } from "react";
+import API from "../utils/api";
+
 
 const Auth = () => {
     const [isSignUp, setIsSignUp] = useState(false);
@@ -8,31 +10,28 @@ const Auth = () => {
     const [username, setUsername] = useState("");
     const navigate = useNavigate();
   
-    const handlesubmit = async (e: FormEvent) => {
-      e.preventDefault();
-      const url = isSignUp ? "http://localhost:8080/register" : "http://localhost:8080/login";
-  
-      try {
-        const res = await fetch(url, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, password, role: "USER" }),
-        });
-  
-        if (!res.ok) {
-          const errorData = await res.json();
-          throw new Error(errorData.message || "Something went wrong");
-        }
-  
-        const data = await res.json();
-        localStorage.setItem("token", data?.token);
-        alert("Success");
-        navigate("/home");
-      } catch (error: any) {
-    alert(error.message);
-      }
-    };
-  
+
+const handlesubmit = async (e: FormEvent) => {
+  e.preventDefault();
+
+  const url = isSignUp ? "/register" : "/login";
+
+  try {
+    const response = await API.post(
+      url,
+      { username, password, role: "USER" },
+      { headers: { "Content-Type": "application/json" } }
+    );
+
+    localStorage.setItem("token", response.data?.token);
+    alert("Success");
+    navigate("/home");
+  } catch (error: any) {
+    console.log(error)
+    alert(error.response?.data?.message || "Something went wrong");
+  }
+};
+
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 to-gray-800">
         <AuthForm
