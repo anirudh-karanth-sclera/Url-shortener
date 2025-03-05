@@ -97,7 +97,7 @@ export default function UserUrls() {
         </button>
       </nav>
 
-      {successMessage && <Success msg={successMessage} />} {/* Show success message */}
+      {successMessage && <Success msg={successMessage} customCSS="top-20" />} {/* Show success message */}
 
       <div className="bg-white p-6  rounded-2xl shadow-lg w-96 text-gray-900 mt-16">
         {error ? (

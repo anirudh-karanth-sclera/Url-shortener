@@ -28,10 +28,13 @@ const Auth = () => {
       
       if (isSignUp) {
         setSuccessMessage("Account created successfully!");
-        setTimeout(() => setSuccessMessage(null), 3000); // Remove after 3 seconds
+        
+        // setTimeout(() => setSuccessMessage(null), 3000); // Remove after 3 seconds
       } else {
-        navigate("/home");
+        setSuccessMessage("Logged in successfully!");
+
       }
+      navigate("/home");
       
     } catch (error: any) {
       console.log(error);
@@ -41,7 +44,7 @@ const Auth = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 to-gray-800">
-      {successMessage && <Success msg={successMessage} />} {/* Show Success message */}
+      {successMessage && <Success msg={successMessage} customCSS="top-5"/>} {/* Show Success message */}
       <AuthForm
         buttonValue={isSignUp ? "Sign Up" : "Login"}
         password={password}
