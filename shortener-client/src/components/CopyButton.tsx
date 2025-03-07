@@ -6,7 +6,7 @@ const CopyButton = ({ shortUrl, isGuest }: { shortUrl: string , isGuest:boolean}
   const [copiedUrl, setCopiedUrl] = useState<string>("");
 
   const handleCopy = () => {
-    const fullUrl = `http://localhost:5173/${isGuest?"gi":"G"}/${shortUrl}`;
+    const fullUrl = `${window.location.origin}/${isGuest?"gi":"G"}/${shortUrl}`;
     navigator.clipboard.writeText(fullUrl);
     setCopiedUrl(fullUrl);
 
@@ -16,9 +16,6 @@ const CopyButton = ({ shortUrl, isGuest }: { shortUrl: string , isGuest:boolean}
   };
   return (
     <>
-
-
-
       <button
         onClick={() => handleCopy()}
         className="ml-2 px-3 py-1"
@@ -26,8 +23,6 @@ const CopyButton = ({ shortUrl, isGuest }: { shortUrl: string , isGuest:boolean}
       >
         {copiedUrl.length < 1 ? <FaRegCopy /> : <TiTick />}
       </button>
-
-
     </>
   )
 }

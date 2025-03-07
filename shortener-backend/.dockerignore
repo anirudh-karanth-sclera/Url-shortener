@@ -1,0 +1,22 @@
+# Ignore Maven & Gradle build directories
+target/
+.build/
+
+# Ignore temporary files
+*.log
+*.tmp
+*.swp
+*.swo
+
+# Ignore IDE/editor config files
+.idea/
+.vscode/
+*.iml
+
+# Ignore OS/system files
+.DS_Store
+Thumbs.db
+
+# Ignore Git-related files
+.git/
+.gitignore

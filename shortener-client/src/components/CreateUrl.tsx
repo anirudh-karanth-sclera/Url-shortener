@@ -43,12 +43,12 @@ export default function CreateUrl({handleShorten, urlData, isGuest }:{handleShor
           <p className="mt-4 text-lg text-gray-900">
             Shortened URL:{" "}
             <a
-              href={`http://localhost:5173/${isGuest?"gi":"G"}/${urlData.shortUrl}`}
+              href={`${window.location.origin}/${isGuest?"gi":"G"}/${urlData.shortUrl}`}
               className="text-green-600 underline break-all"
               target="_blank"
               rel="noopener noreferrer"
             >
-              http://localhost:5173/{isGuest?"gi":"G"}/{urlData.shortUrl}
+              {window.location.origin}/{isGuest?"gi":"G"}/{urlData.shortUrl}
             </a>
 
            <CopyButton shortUrl={urlData.shortUrl.toString()} isGuest={isGuest}/>

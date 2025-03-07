@@ -12,12 +12,12 @@ const UrlCard = ({url, index, handleDelete}:{url:UrlType, index?:number, handleD
       <p className="text-green-600 font-semibold">
         {`${index? index:""}`}. {url.name || "none"}:{" "}
         <a
-          href={`http://localhost:5173/G/${url.shortUrl}`}
+          href={`${window.location.origin}/G/${url.shortUrl}`}
           className="underline hover:text-green-800 transition"
           target="_blank"
           rel="noopener noreferrer"
         >
-          {`http://localhost:5173/G/${url.shortUrl}`}
+          {`${window.location.origin}/G/${url.shortUrl}`}
         </a>
       </p>
     </div>
