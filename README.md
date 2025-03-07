@@ -26,15 +26,11 @@ A simple URL shortener with role-based authentication, JWT security, and expirat
    ```sh
    cd shortener-backend
    ```
-2. Build the project using Maven:
-   ```sh
-   mvn clean package
-   ```
-3. Build the Docker image:
+2. Build the Docker image:
    ```sh
    docker build -t url-shortener .
    ```
-4. Run the Docker container:
+3. Run the Docker container:
    ```sh
    docker run -p 8080:8080 url-shortener
    ```
@@ -74,7 +70,7 @@ A simple URL shortener with role-based authentication, JWT security, and expirat
    ```
 3. Run the development server:
    ```sh
-   npm start
+   npm run dev
    ```
 
 The backend will be accessible at `http://localhost:8080`, and the frontend at `http://localhost:5173`.
