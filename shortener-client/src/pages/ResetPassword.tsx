@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import  API  from "../utils/api";
-import { toast } from "react-toastify";
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState("");
@@ -12,17 +11,16 @@ const ResetPassword = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!token) {
-      toast.error("Invalid password reset link.");
+      console.error("Invalid password reset link.");
       return;
     }
     try {
       const res = await API.post(`/reset-password?token=${token}&newPassword=${newPassword}` )
-      toast.success("Password reset successful!");
+
       console.log(res)
       navigate("/auth");
     } catch (error) {
         console.log(error)
-      toast.error("Failed to reset password");
     }
   };
 

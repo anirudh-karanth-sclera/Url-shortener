@@ -11,9 +11,9 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void sendResetEmail(String to, String resetToken) {
+    public void sendResetEmail(String to, String resetToken, String clientUrl) {
         String subject = "Password Reset Request";
-        String resetUrl = "http://localhost:5173/reset-password?token=" + resetToken;
+        String resetUrl = clientUrl+"/reset-password?token=" + resetToken;
 
         String message = "Click the link below to reset your password:\n" + resetUrl;
 

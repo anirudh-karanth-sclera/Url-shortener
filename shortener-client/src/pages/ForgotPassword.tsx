@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import API from "../utils/api";
 import Success from "../components/Success"; // Import Success component
@@ -15,7 +14,10 @@ const ForgotPassword = () => {
     setError(null); 
 
     try {
-      await API.post(`/forgot-password?email=${email}`);
+      await API.post(`/forgot-password?`,{
+        clientUrl : `${window.location.origin}`,
+        email
+      });
       setSuccessMessage("Password reset email sent!");
     } catch (error: any) {
       console.log(error);

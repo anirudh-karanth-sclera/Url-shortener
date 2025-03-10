@@ -1,6 +1,7 @@
 package com.shortner.ungari.shortner.controller;
 
 import com.shortner.ungari.shortner.Repository.UserRepo;
+import com.shortner.ungari.shortner.model.ForgotPasswordDto;
 import com.shortner.ungari.shortner.model.PasswordResetToken;
 import com.shortner.ungari.shortner.model.Users;
 import com.shortner.ungari.shortner.service.EmailService;
@@ -30,10 +31,12 @@ public class PasswordResetController {
     private EmailService emailService;
 
     @PostMapping("/forgot-password")
-    public ResponseEntity<?> forgotPassword(@RequestParam String email) {
+    public ResponseEntity<?> forgotPassword(@RequestBody ForgotPasswordDto req) {
 
+        String email = req.getEmail();
+        String clientUrl = req.getClientUrl();
         String resetToken = tokenService.createResetToken(email);
-        emailService.sendResetEmail(email, resetToken);
+        emailService.sendResetEmail(email, resetToken, clientUrl);
         return ResponseEntity.ok("Password reset email sent!");
     }
 
