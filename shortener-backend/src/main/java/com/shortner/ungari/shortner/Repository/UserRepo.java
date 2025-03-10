@@ -11,8 +11,8 @@ public interface UserRepo extends JpaRepository<Users, Integer> {
 
     @Override
     Optional<Users> findById(Integer integer);
-    Optional<Users> findByUsername(String username);
-    boolean existsByUsername(String username);
+    Optional<Users> findByEmail(String email);
+    boolean existsByEmail(String email);
 
 
 }

@@ -27,34 +27,34 @@ public class UserService {
     private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
     public UserDTO createUser(Users user) {
-        if (userRepo.existsByUsername(user.getUsername())) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "User with username '" + user.getUsername() + "' already exists!");
+        if (userRepo.existsByEmail(user.getEmail())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "User with username '" + user.getEmail() + "' already exists!");
         }
         user.setPassword(encoder.encode(user.getPassword()));
         Users newUser = userRepo.save(user);
-        String token = jwtService.generateToken(newUser.getUsername(), newUser.getRole().name());
+        String token = jwtService.generateToken(newUser.getEmail(), newUser.getRole().name());
 
-        return new UserDTO(newUser.getId(), newUser.getUsername(), token);
+        return new UserDTO(newUser.getId(), newUser.getEmail(), token);
     }
 
     public String verify(Users user, Role role) {
-        Users storedUser = userRepo.findByUsername(user.getUsername())
+        Users storedUser = userRepo.findByEmail(user.getEmail())
                 .orElseThrow(() ->
                         new ResponseStatusException(HttpStatus.NOT_FOUND, "User does not exist"));
 
         try {
             authManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword())
+                    new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())
             );
         } catch (BadCredentialsException ex) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid username or password");
         }
 
-        return jwtService.generateToken(storedUser.getUsername(), storedUser.getRole().name());
+        return jwtService.generateToken(storedUser.getEmail(), storedUser.getRole().name());
     }
 
-    public Users findUserByName(String username) {
-        return userRepo.findByUsername(username)
+    public Users findUserByEmail(String email) {
+        return userRepo.findByEmail(email)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     }
 }

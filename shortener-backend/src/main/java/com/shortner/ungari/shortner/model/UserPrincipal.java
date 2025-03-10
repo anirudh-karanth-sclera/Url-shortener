@@ -26,7 +26,7 @@ private Users user;
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return user.getEmail();
     }
 
     @Override

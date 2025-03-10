@@ -9,6 +9,8 @@ import UserUrls from "./pages/UserUrls";
 import LandingPage from "./pages/Landing";
 import { GuestPage } from "./pages/Guest";
 import RedirectGuestHandler from "./pages/RedirectGuestHandler";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 
 export default function App() {
 
@@ -20,6 +22,8 @@ export default function App() {
         <Route path="/home" element={<ProtectedRoute ><Home /></ProtectedRoute>} />
         <Route path="/" element={<LandingPage />} />
         <Route path="/auth" element={<Auth />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/G/:shortUrl" element={<RedirectHandler />} />
         <Route path="/gi/:shortUrl" element={<RedirectGuestHandler />} />
 

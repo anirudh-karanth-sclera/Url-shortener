@@ -20,7 +20,7 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<UserDTO> register(@RequestBody Users user) {
 
-        if((user.getUsername()== null || user.getUsername().isEmpty())
+        if((user.getEmail()== null || user.getEmail().isEmpty())
                 && (user.getPassword()==null || user.getPassword().isEmpty())){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid credentials");
         }
@@ -30,12 +30,12 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<UserDTO> login(@RequestBody Users user) {
-        if((user.getUsername()== null || user.getUsername().isEmpty())
+        if((user.getEmail()== null || user.getEmail().isEmpty())
                 && (user.getPassword()==null || user.getPassword().isEmpty())){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid credentials");
         }
         String token = userService.verify(user, user.getRole());
-        return ResponseEntity.ok(new UserDTO(user.getId(), user.getUsername(), token));
+        return ResponseEntity.ok(new UserDTO(user.getId(), user.getEmail(), token));
     }
 
 

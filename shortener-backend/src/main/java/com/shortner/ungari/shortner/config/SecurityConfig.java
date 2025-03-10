@@ -44,7 +44,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .headers(headers -> headers.frameOptions(frame -> frame.disable()))  // Allow H2 console frames(frame -> frame.disable())) // Allow H2 console frames
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers("/","/go/**","/login", "/register","/unga/**","/h2-console/**").permitAll() // Allow public access
+                        .requestMatchers("/","/go/**","/login", "/register","/unga/**","/h2-console/**","/forgot-password","/reset-password").permitAll() // Allow public access
                         .anyRequest().authenticated() // Require authentication for other requests
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

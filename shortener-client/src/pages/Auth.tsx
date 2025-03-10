@@ -7,7 +7,7 @@ import Success from "../components/Success"; // Import Success component
 const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null); // Success message state
 
@@ -20,7 +20,7 @@ const Auth = () => {
     try {
       const response = await API.post(
         url,
-        { username, password, role: "USER" },
+        { email, password, role: "USER" },
         { headers: { "Content-Type": "application/json" } }
       );
 
@@ -48,10 +48,10 @@ const Auth = () => {
       <AuthForm
         buttonValue={isSignUp ? "Sign Up" : "Login"}
         password={password}
-        username={username}
+        email={email}
         handleSubmit={handleSubmit}
         setPassword={setPassword}
-        setUsername={setUsername}
+        setEmail={setEmail}
         setIsSignUp={setIsSignUp}
         isSignUp={isSignUp}
         error={error}

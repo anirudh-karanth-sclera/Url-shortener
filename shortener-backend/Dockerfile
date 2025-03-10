@@ -8,8 +8,17 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
+# Install dependencies (optional, but useful for some cases)
+RUN apk add --no-cache tzdata
+
 # Copy only the built JAR
 COPY --from=builder /app/target/shortener-backend-0.0.1-SNAPSHOT.jar app.jar
 
-# Run the application
+# Copy the .env file
+COPY .env .env
+
+# Expose the application's port
+EXPOSE 8080
+
+# Run the application, ensuring environment variables are passed
 ENTRYPOINT ["java", "-jar", "app.jar"]

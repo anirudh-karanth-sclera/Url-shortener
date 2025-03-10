@@ -58,13 +58,13 @@ public class UrlServiceDao {
                         HttpStatus.NOT_FOUND, "Short URL not found: " + shortUrl
                 ));
 
-        return existingUrl.getUser().getUsername().equals(username);
+        return existingUrl.getUser().getEmail().equals(username);
 
     }
 
 
     public List<Url> getAllUrlsOfUser(String username) {
-        Users user = userService.findUserByName(username);
+        Users user = userService.findUserByEmail(username);
         return  urlRepo.findByUser(user);
     }
 
@@ -82,7 +82,7 @@ public class UrlServiceDao {
     }
 
     public List<Url> getAllUrlsOfUserHavingName(String username, String name) {
-        Users user = userService.findUserByName(username);
+        Users user = userService.findUserByEmail(username);
         return urlRepo.findByUserAndNameContainingIgnoreCase(user, name);
     }
 

@@ -1,31 +1,34 @@
 import React, { FormEvent } from "react";
-
+import { useNavigate } from "react-router-dom";
 
 interface AuthFormType {
-  username: string;
+  email: string;
   password: string;
   buttonValue: string;
   handleSubmit: (e: FormEvent) => void;
-  setUsername: React.Dispatch<React.SetStateAction<string>>;
+  setEmail: React.Dispatch<React.SetStateAction<string>>;
   setPassword: React.Dispatch<React.SetStateAction<string>>;
   isSignUp: boolean;
   setIsSignUp: React.Dispatch<React.SetStateAction<boolean>>;
-  error:string|null
+  error: string | null;
 }
 
 const AuthForm = ({
-  username,
+  email,
   password,
   buttonValue,
   handleSubmit,
-  setUsername,
+  setEmail,
   setPassword,
   isSignUp,
   setIsSignUp,
-  error
+  error,
 }: AuthFormType) => {
+  const navigate = useNavigate();
+  const handleForgotPassword = () => {
+    navigate("/forgot-password");
+  };
 
-  
   return (
     <div className="flex flex-col items-center justify-center  bg-gradient-to-br from-gray-900 to-gray-800 text-white p-6">
       <form
@@ -36,14 +39,14 @@ const AuthForm = ({
           {buttonValue}
         </h2>
 
-        <label htmlFor="username" className="text-gray-700 font-medium">
-          Username
+        <label htmlFor="email" className="text-gray-700 font-medium">
+          Email
         </label>
         <input
-          type="text"
-          name="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          type="email"
+          name="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           className="p-3 text-black border rounded bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
         />
 
@@ -57,6 +60,16 @@ const AuthForm = ({
           onChange={(e) => setPassword(e.target.value)}
           className="p-3 border text-black rounded bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500"
         />
+
+        {!isSignUp && (
+          <button
+            type="button"
+            onClick={handleForgotPassword}
+            className="text-green-500 text-sm mt-2 self-end hover:underline"
+          >
+            Forgot Password?
+          </button>
+        )}
 
         <button
           type="submit"
@@ -81,5 +94,4 @@ const AuthForm = ({
   );
 };
 
-
-export default AuthForm
+export default AuthForm;

@@ -1,8 +1,7 @@
 package com.shortner.ungari.shortner.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 import java.util.List;
@@ -14,8 +13,9 @@ public class Users {
     private int id;
 
     @NotBlank(message = "enchi saav")
+    @Email(message = "Please provide valid email")
     @Column(nullable = false, unique = true) // Ensure username is unique
-    private String username;
+    private String email;
 
     @Column(nullable = false)
     private String password;
@@ -31,7 +31,7 @@ public class Users {
 
     public Users(int id, String username, String password) {
         this.id = id;
-        this.username = username;
+        this.email = username;
         this.password = password;
     }
 
@@ -43,12 +43,12 @@ public class Users {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -75,7 +75,7 @@ public class Users {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", username='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

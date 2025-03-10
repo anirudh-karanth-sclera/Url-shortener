@@ -6,13 +6,11 @@ import com.shortner.ungari.shortner.model.Users;
 import com.shortner.ungari.shortner.service.UrlGuestServiceDao;
 import com.shortner.ungari.shortner.service.UrlServiceDao;
 import com.shortner.ungari.shortner.service.UserService;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 import java.util.Map;
@@ -32,8 +30,8 @@ public class ShortUrlController {
 
     @PostMapping("/create")
     public ResponseEntity<?> createShortUrl(@RequestBody Map<String, String> request) {
-            String username = SecurityContextHolder.getContext().getAuthentication().getName();
-            Users user = userService.findUserByName(username);
+            String email = SecurityContextHolder.getContext().getAuthentication().getName();
+            Users user = userService.findUserByEmail(email);
 
             String url = request.get("url");
             String name = request.get("name");

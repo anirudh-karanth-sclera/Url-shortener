@@ -39,10 +39,10 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
-            String username = jwtService.extractUsername(token);
+            String email = jwtService.extractEmail(token);
 
-            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDetails userDetails = myUserDetailsService.loadUserByUsername(username);
+            if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                UserDetails userDetails = myUserDetailsService.loadUserByUsername(email);
 
                 Claims claims = jwtService.extractAllClaims(token);
                 String role = claims.get("role", String.class);
